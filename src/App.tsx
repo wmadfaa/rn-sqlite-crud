@@ -1,37 +1,9 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
-import * as TodoList from "./todo.module";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { useAsync, useAsyncCallback } from "react-async-hook";
+import * as TodoList from "./todo.module";
 import { ItemsList } from "./ItemsList";
-
-export interface ITodoInputProps {
-  onSubmit(value: string): void;
-}
-
-export const TodoInput: React.VFC<ITodoInputProps> = ({ onSubmit }) => {
-  const [text, setText] = useState<string>("");
-
-  const handleSubmit = () => {
-    if (text) {
-      onSubmit(text);
-      setText("");
-    }
-  };
-
-  const handleOnChange = (val: string) => {
-    setText(val);
-  };
-
-  return (
-    <TextInput
-      onChangeText={handleOnChange}
-      onSubmitEditing={handleSubmit}
-      placeholder="what do you need to do?"
-      style={styles.input}
-      value={text}
-    />
-  );
-};
+import { TodoInput } from "./TodoInput";
 
 export default function App() {
   const [items, setItems] = useState<TodoList.IItem[]>([]);
@@ -106,13 +78,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  input: {
-    borderColor: "black",
-    borderRadius: 4,
-    borderWidth: 1,
-    margin: 16,
-    padding: 16,
-    fontSize: 16,
   },
 });
